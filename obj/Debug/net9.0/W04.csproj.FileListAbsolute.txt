@@ -77,3 +77,4 @@ C:\Users\Santiago\OneDrive\Escritorio\Estudios\BYU\13\.NET Software Development\
 C:\Users\Santiago\OneDrive\Escritorio\Estudios\BYU\13\.NET Software Development\W04\obj\Debug\net9.0\W04.pdb
 C:\Users\Santiago\OneDrive\Escritorio\Estudios\BYU\13\.NET Software Development\W04\obj\Debug\net9.0\W04.genruntimeconfig.cache
 C:\Users\Santiago\OneDrive\Escritorio\Estudios\BYU\13\.NET Software Development\W04\obj\Debug\net9.0\ref\W04.dll
+C:\Users\Santiago\OneDrive\Escritorio\Estudios\BYU\13\.NET Software Development\W04\obj\Debug\net9.0\W04.sourcelink.json
