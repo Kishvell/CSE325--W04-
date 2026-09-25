@@ -1,0 +1,72 @@
+.connect-container[b-60fo28mepy] {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.score-card[b-60fo28mepy] {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+
+.player1-card[b-60fo28mepy] {
+    background-color: #dc3545;
+}
+
+.player2-card[b-60fo28mepy] {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.board-grid[b-60fo28mepy] {
+    display: flex;
+    background-color: #0d6efd;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.board-column[b-60fo28mepy] {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.board-column:hover[b-60fo28mepy] {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.cell[b-60fo28mepy] {
+    aspect-ratio: 1;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.piece[b-60fo28mepy] {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.piece.empty[b-60fo28mepy] {
+    background-color: #ffffff;
+}
+
+.piece.player1[b-60fo28mepy] {
+    background-color: #dc3545;
+}
+
+.piece.player2[b-60fo28mepy] {
+    background-color: #ffc107;
+}
+
+.history-scroll[b-60fo28mepy] {
+    max-height: 140px;
+    overflow-y: auto;
+}

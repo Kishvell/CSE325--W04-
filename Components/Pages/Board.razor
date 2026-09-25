@@ -1,0 +1,111 @@
+@using W04
+@rendermode InteractiveServer
+
+<div class="connect-container">
+    <h1 class="text-center mb-3">Connect Four</h1>
+
+    <!-- Scoreboard (Custom Feature) -->
+    <div class="scoreboard d-flex justify-content-around mb-3">
+        <div class="score-card player1-card">
+            <h5>Player 1 (Red)</h5>
+            <p class="fs-4 fw-bold mb-0">@player1Wins Wins</p>
+        </div>
+        <div class="score-card player2-card">
+            <h5>Player 2 (Yellow)</h5>
+            <p class="fs-4 fw-bold mb-0">@player2Wins Wins</p>
+        </div>
+    </div>
+
+    <!-- Turn Status Banner -->
+    <div class="status-banner mb-3 text-center">
+        @if (game.CheckForWin() == GameState.WinState.NoWinner)
+        {
+            <p class="fs-5">Current Turn: <span
+                class="@(game.PlayerTurn == 1 ? "text-danger fw-bold" : "text-warning fw-bold")">Player
+                @game.PlayerTurn</span></p>
+            }
+        else if (game.CheckForWin() == GameState.WinState.Player1_Wins)
+            {
+                <div class="alert alert-danger fw-bold fs-4">🎉 Player 1 Wins!</div>
+            }
+            else if (game.CheckForWin() == GameState.WinState.Player2_Wins)
+            {
+                <div class="alert alert-warning fw-bold fs-4">🎉 Player 2 Wins!</div>
+            }
+            else
+            {
+                <div class="alert alert-secondary fw-bold fs-4">It's a Tie!</div>
+            }
+        </div>
+
+        <!-- Board Grid -->
+        <div class="board-grid">
+            @for (int col = 0; col < 7; col++)
+            {
+                int colNum = col;
+                <div class="board-column" @onclick="() => DropPiece(colNum)">
+                    @for (int row = 0; row < 6; row++)
+                    {
+                        int piece = game.Board[row * 7 + colNum];
+                        <div class="cell">
+                            <div class="piece @(piece == 1 ? "player1" : piece == 2 ? "player2" : "empty")"></div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-3">
+            <button class="btn btn-primary btn-lg" @onclick="ResetGame">Reset Game</button>
+        </div>
+
+        <!-- Move History Log (Custom Feature) -->
+        <div class="mt-4 move-log-box">
+            <h5>Move History Log</h5>
+            <div class="history-scroll border rounded p-2 bg-light">
+                @if (moveHistory.Count == 0)
+                {
+                    <p class="text-muted mb-0">No moves played yet.</p>
+                }
+                else
+                {
+                    <ol class="mb-0 ps-3">
+                        @foreach (var move in moveHistory)
+                        {
+                            <li>@move</li>
+                        }
+                    </ol>
+                }
+            </div>
+        </div>
+    </div>
+
+@code {
+    private GameState game = new();
+    private int player1Wins = 0;
+    private int player2Wins = 0;
+    private List<string> moveHistory = new();
+
+    private void DropPiece(int col)
+    {
+        if (game.CheckForWin() != GameState.WinState.NoWinner) return;
+
+        int activePlayer = game.PlayerTurn;
+        int row = game.PlayPiece(col);
+
+        if (row != -1)
+        {
+            moveHistory.Insert(0, $"Player {activePlayer} dropped a piece into Column {col + 1} (Row {row + 1})");
+
+            var winner = game.CheckForWin();
+            if (winner == GameState.WinState.Player1_Wins) player1Wins++;
+            else if (winner == GameState.WinState.Player2_Wins) player2Wins++;
+        }
+    }
+
+    private void ResetGame()
+    {
+        game.Reset();
+        moveHistory.Clear();
+    }
+}
